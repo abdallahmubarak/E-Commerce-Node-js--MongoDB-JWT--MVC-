@@ -1,14 +1,13 @@
 const express =require('express')
 const path =require('path')
-const cors =require('cors')
+const multer =require('multer')
 
 require('dotenv').config()
 require('./config/db')
 
 const app =express()
 
-app.use(cors())
-app.use(express.static(path.join(__dirname,'../static')))
+app.use(express.static(path.join(__dirname,'../static/images')))
 app.use(express.json())
 app.use(express.urlencoded({extended:true}))
 

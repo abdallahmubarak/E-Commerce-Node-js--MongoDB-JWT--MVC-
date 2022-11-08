@@ -1,8 +1,10 @@
 const router = require('express').Router()
 const productController =require('../controllers/product.controller')
 const {auth,authAdmin,authUser} =require('../midderlware/auth.middelware')
+const uploadImgProduct =require('../midderlware/uploadImgProduct.middleware')
 
-router.post('/addproduct',auth,productController.add_product)
+
+router.post('/addproduct',auth,uploadImgProduct.single('img'),productController.add_product)
 router.delete('/deleteProduct/:id',auth,authAdmin,productController.delete_product)
 router.get('/productview/:id',auth,productController.view_product)
 router.get('/productsview',productController.view_all_product)

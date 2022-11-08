@@ -1,6 +1,7 @@
 const router =require('express').Router()
 const userController =require('../controllers/user.controller')
 const {auth, authAdmin, authUser} =require('../midderlware/auth.middelware')
+const uploadPfrfile =require('../midderlware/uploadProfileUser.middleware')
 
 router.post('/login',userController.login_user)
 router.post('/registerUser',userController.register_user)
