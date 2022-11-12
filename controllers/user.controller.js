@@ -1,6 +1,7 @@
 const {resBuilder} = require("../helper/app.helper")
 const userModel =require('../models/user.model')
 const bcrypt=require('bcryptjs')
+const sendEmail=require('../midderlware/sendEmail')
 
 class User{
 
@@ -8,8 +9,14 @@ static register_user =async(req,res,next)=>{
     try {
         const userData=new userModel(req.body);
         userData.userType="user"
-        await userData.save();
-
+        const savedUser= await userData.save();
+        const token = savedUser.getEmailJwtToken();
+        const url = `${req.protocol}://${req.get(
+            "host"
+            )}/api/v1/auth/confirm-email/${token}`;
+        const message = `<p>Use this email to verify your email</p><br><a href='${url}'>Verify Email</a>`;
+        sendEmail(savedUser.email, message, "Verify Email");
+        
         resBuilder(res,true, userData, "user register")
     } catch (error) {
         resBuilder(res,false, error, "user not register")
@@ -99,6 +106,7 @@ static me = async(req,res)=>{
     try {
         const userId = req.user.id
         const userfound = await userModel.findOneAndRemove(userId)
+
         
         resBuilder(res,true,userfound ,"user is deleted")
         
