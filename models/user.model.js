@@ -12,8 +12,9 @@ userType:{type:String, enum:["admin", "user"]},
 tokens:[{
     token:{type:String}
 }],
-myCart:[{product:{type: mongoose.Schema.Types.ObjectId,ref: 'Product'}, 
-         quantity: { type: Number, required: true }
+myCart:[{
+    product:{type: mongoose.Schema.Types.ObjectId,ref: 'Product'}, 
+    quantity: { type: Number, required: true }
 }],
 wishList: [{product:{type: mongoose.Schema.Types.ObjectId,ref: 'Product'}}],
 

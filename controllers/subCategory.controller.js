@@ -18,11 +18,11 @@ class subCategory{
         //category.savedSubcategory.push({
           //  subCategories: savedSubcategory._id
         //});
-        updatedCategory.save()
 
         resBuilder(res,true,updatedCategory,"subCategory added")
     } catch (error) {
-            
+      resBuilder(res,false,error,error.message)
+
         }
 
     }
@@ -33,7 +33,17 @@ class subCategory{
         
     }
     static get_subCategory =async(req,res)=>{
+       try {
+        const subCategoryId= req.params.id
+        const subcategory = await subCategoryModel.findById(subCategoryId);
+        if (!subcategory) {
+          return next(new AppError("Subcategory not found", 404));
+        }
+        resBuilder(res,true,subCategory,"subcategory found")
+       } catch (error) {
+        resBuilder(res,false,error,error.message)
         
+       } 
     }
     static get_all_subCategorys =async(req,res)=>{
         

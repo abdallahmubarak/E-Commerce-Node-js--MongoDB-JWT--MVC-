@@ -1,11 +1,23 @@
 const mongoose =require('mongoose')
+const slugify = require("slugify");
+
+
 const subCategorySchema =mongoose.Schema({
-    name:{type:String},
+
+    title:{type:String},
     products:{type:mongoose.Schema.Types.ObjectId,ref:'Product'},
-    category:{type:mongoose.Schema.Types.ObjectId,ref:'Category'},
-    
+    Category:{type:mongoose.Schema.Types.ObjectId,ref:'Category'},
+    slug: String
+},  { timestamps: true }
 
+)
 
-})
+subCategorySchema.pre("save", function (next) {
+    this.slug = slugify(this.title, { lower: true });
+    next();
+  });
+ 
+  
+  
 const subCategory =mongoose.model('subCategory',subCategorySchema)
 module.exports=subCategory
