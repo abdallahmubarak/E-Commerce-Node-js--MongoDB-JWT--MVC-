@@ -125,7 +125,16 @@ class Product{
 
     }
     static removeFromWhishlist=async(req,res)=>{
-        
+        try {
+            const productId=req.params.id
+            const userWhatlist=req.user
+            userWhatlist.wishList = userWhatlist.wishList.filter((c)=>c.productId!=productId)
+            await userWhatlist.save()
+            resBuilder(res,true,[],"product delete")
+
+        } catch (error) {
+            resBuilder(res,false,error,error.message)
+        }
     }
     
     static getWhishlist= async(req,res)=>{

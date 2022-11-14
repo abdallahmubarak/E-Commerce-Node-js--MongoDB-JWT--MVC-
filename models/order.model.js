@@ -5,20 +5,13 @@ const orderSchema = new mongoose.Schema(
     deliveryInfo: {
       address: { type: String, required: true },
       city: { type: String, required: true },
-      country: { type: String, required: true },
-      postalCode: { type: String, required: true },
       phoneNumber: { type: String, required: true },
     },
     user: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
-    orderItems: [
-      {
-        name: { type: String, required: true },
-        product: { type: mongoose.Schema.Types.ObjectId, ref: "Product" },
-        quantity: { type: Number, required: true },
-        price: { type: Number, required: true },
-      },
-    ],
-    itemsPrice: { type: Number },
+    myCart:[{
+      product:{type: mongoose.Schema.Types.ObjectId,ref: 'Product'}, 
+      quantity: { type: Number }
+  }],
     taxPrice: { type: Number },
     shippingPrice: { type: Number },
     paidAt: Date,
@@ -30,6 +23,8 @@ const orderSchema = new mongoose.Schema(
     timestamps: true,
   }
 );
+
+
 
 const Order = mongoose.model("Order", orderSchema);
 
