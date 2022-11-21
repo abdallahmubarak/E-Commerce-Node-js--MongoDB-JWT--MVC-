@@ -6,12 +6,28 @@ class Order{
     
     static totalPrice =async(req,res)=>{
        try {
-        req.body.paidAt = Date.now();
-        req.body.user = req.user.id;
-        resBuilder(res,true,totalAmount,"order")     
+        let products;
+        let total = 0;
+        const user=req.user
+        const cart =user.populate('myCart.product')
+        //console.log(cart)
+        products = user.myCart;
+        console.log(products)
+        products.forEach(p => {
+            console.log(p.productId.price)
+            console.log(p.quantity)
+
+        total += p.quantity * p.productId.price;     
+        })
+        
+
+        resBuilder(res,true,data,"order")  
+
        } catch (error) {
+        
         resBuilder(res,false,error,error.message)     
-       }
+       
+    }
     }
     static createOrder =async(req,res)=>{
         try {

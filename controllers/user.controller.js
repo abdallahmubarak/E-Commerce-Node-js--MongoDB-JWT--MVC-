@@ -11,9 +11,7 @@ static register_user =async(req,res,next)=>{
         userData.userType="user"
         const savedUser= await userData.save();
         const token = savedUser.getEmailJwtToken();
-        const url = `${req.protocol}://${req.get(
-            "host"
-            )}/api/v1/auth/confirm-email/${token}`;
+        const url = `${req.protocol}://${req.get("host" )}/api/v1/auth/confirm-email/${token}`;
         const message = `<p>Use this email to verify your email</p><br><a href='${url}'>Verify Email</a>`;
         sendEmail(savedUser.email, message, "Verify Email");
         

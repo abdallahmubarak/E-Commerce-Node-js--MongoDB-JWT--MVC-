@@ -9,16 +9,25 @@ age:{type:Number},
 email:{type:String},
 password:{type:String},
 userType:{type:String, enum:["admin", "user"]},
+
 tokens:[{
+
     token:{type:String}
+
 }],
+
 myCart:[{
+
     product:{type: mongoose.Schema.Types.ObjectId,ref: 'Product'}, 
     quantity: { type: Number }
-}],
-wishList: [{product:{type: mongoose.Schema.Types.ObjectId,ref: 'Product'}}],
-orders: [{type: mongoose.Schema.Types.ObjectId,ref: 'Product'}],
 
+}],
+
+wishList: [{product:{type: mongoose.Schema.Types.ObjectId,ref: 'Product'}}],
+
+orders: [{
+    product:[{type: mongoose.Schema.Types.ObjectId,ref: 'Product'}
+]}],
 
 },
 {timestamps:true})
