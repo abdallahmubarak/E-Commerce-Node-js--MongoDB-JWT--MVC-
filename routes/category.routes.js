@@ -1,7 +1,7 @@
 const router =require('express').Router();
 const categoryController=require('../controllers/category.controller');
-const {auth,authAdmin,authUser} =require('../midderlware/auth.middelware');
-const uploadImgProduct =require('../midderlware/uploadImgProduct.middleware')
+const {auth,authAdmin,authUser} =require('../middelware/auth.middelware');
+const uploadImgProduct =require('../middelware/uploadImgProduct.middleware')
 
 
 

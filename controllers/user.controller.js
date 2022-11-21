@@ -1,7 +1,7 @@
 const {resBuilder} = require("../helper/app.helper")
 const userModel =require('../models/user.model')
 const bcrypt=require('bcryptjs')
-const sendEmail=require('../midderlware/sendEmail')
+const sendEmail=require('../middelware/sendEmail')
 
 class User{
 

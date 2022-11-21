@@ -1,7 +1,7 @@
 const router =require('express').Router();
-const {auth,authAdmin,authUser}=require('../midderlware/auth.middelware')
+const {auth,authAdmin,authUser}=require('../middelware/auth.middelware')
 const subCategoryController =require('../controllers/subCategory.controller')
-const uploadImgProduct =require('../midderlware/uploadImgProduct.middleware')
+const uploadImgProduct =require('../middelware/uploadImgProduct.middleware')
 
 
 router.post('/createSubCategory/:categoryId',auth,authAdmin,uploadImgProduct.single('img'),subCategoryController.create_subCategory)
